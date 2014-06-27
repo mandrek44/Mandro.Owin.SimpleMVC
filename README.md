@@ -78,8 +78,8 @@ Single MVC engine-middleware compatible with Owin.
    - If controller or method is decorated with `Authorize` attribute, then user must first authenticate to call that controller/method. Sample controller login method:
 
 
-    public dynamic PostLogin(dynamic loginDetails)
-    {
+     public dynamic PostLogin(dynamic loginDetails)
+     {
         // Check following fields:
         // loginDetails.UserName
         // loginDetails.Password
@@ -92,4 +92,4 @@ Single MVC engine-middleware compatible with Owin.
         context.SignIn(id);
 
         return Redirect.To((Home controller) => controller.GetIndex);
-    }
+     }
