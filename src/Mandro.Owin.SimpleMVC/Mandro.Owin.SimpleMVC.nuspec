@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Mandro.Owin.SimpleMVC</id>
+    <version>$version$</version>
+    <authors>Mandro</authors>
+    <owners>Mandro</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Micro OWIN-compatible MVC</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags></tags>
+    <dependencies>
+		<dependency id="Autofac" version="3.5.0"  />  
+		<dependency id="Humanizer" version="1.27.0"  />
+		<dependency id="Microsoft.AspNet.Razor" version="3.0.0"  />
+		<dependency id="Microsoft.Owin" version="2.1.0"  />
+		<dependency id="Owin" version="1.0"  />
+		<dependency id="RazorEngine" version="3.4.1"  />	
+    </dependencies>
+  </metadata>
+</package>
