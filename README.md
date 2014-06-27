@@ -3,7 +3,7 @@ Owin SimpleMVC
 
 Single MVC engine-middleware compatible with Owin.
 
-## Example
+## Usage
 
  - Create new Console project
  - In `Package Manager Console`, type following:
@@ -13,12 +13,13 @@ Single MVC engine-middleware compatible with Owin.
  - Add reference to `Mandro.Owin.SimpleMVC` assembly
  - In Program.cs file, paste following content:
 
-       using System;
-       using Microsoft.Owin.Hosting;
-       using Owin;
 
-       namespace Mandro.Owin.SimpleMVC.Sample
-       {
+        using System;
+        using Microsoft.Owin.Hosting;
+        using Owin;
+
+        namespace Mandro.Owin.SimpleMVC.Sample
+        {
           class Program
           {
               static void Main(string[] args)
@@ -37,20 +38,20 @@ Single MVC engine-middleware compatible with Owin.
                   app.Use<SimpleMvcMiddleware>();
               }
           }
-       }
+        }
 
  - In Solution Explorer, in project root, add Controllers folder. Add class `Home` to this folder:
 
-       public class Home
-       {
-           public void GetIndex()
-           {
-           }
-       }
+        public class Home
+        {
+            public void GetIndex()
+            {
+            }
+        }
 
  - In Solution Explorer, in project root, add Views/Home folder. Add file `GetIndex.cshtml` to this folder:
 
-       <h1>Hello world!</h1>
+        <h1>Hello world!</h1>
 
  - Run and navigate to http://localhost:12345
 
@@ -76,20 +77,20 @@ Single MVC engine-middleware compatible with Owin.
    - When controller method returns `byte[]`, the bytes will be written to resposne stream.
      - The controller method is responsible for setting proper headers, i.e. `Content-Type`
    - If controller or method is decorated with `Authorize` attribute, then user must first authenticate to call that controller/method. Sample controller login method:
+    
+   
+            public dynamic PostLogin(dynamic loginDetails)
+            {
+                // Check following fields:
+                // loginDetails.UserName
+                // loginDetails.Password
 
+                // If succeeded, then:
+                var claims = new[] { new eClaim(ClaimTypes.Name, loginDetails.UserName) };
+                var id = new ClaimsIdentity(claims, "Cookie");
 
-     public dynamic PostLogin(dynamic loginDetails)
-     {
-        // Check following fields:
-        // loginDetails.UserName
-        // loginDetails.Password
+                var context = loginDetails.Context.Authentication as IAuthenticationManager;
+                context.SignIn(id);
 
-        // If succeeded, then:
-        var claims = new[] { new eClaim(ClaimTypes.Name, loginDetails.UserName) };
-        var id = new ClaimsIdentity(claims, "Cookie");
-
-        var context = loginDetails.Context.Authentication as IAuthenticationManager;
-        context.SignIn(id);
-
-        return Redirect.To((Home controller) => controller.GetIndex);
-     }
+                return Redirect.To((Home controller) => controller.GetIndex);
+             }
