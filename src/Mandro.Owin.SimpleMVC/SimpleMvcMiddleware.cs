@@ -159,7 +159,12 @@ namespace Mandro.Owin.SimpleMVC
         {
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
-            var controllers = assemblies.SelectMany(assembly => assembly.GetTypes().Where(type => type.Namespace != null && type.Namespace.EndsWith("Controllers")));
+            var controllers = assemblies.SelectMany(assembly => assembly
+                .GetTypes()
+                .Where(type => type.Namespace != null && type.Namespace.EndsWith("Controllers"))
+                .GroupBy(type => type.Name)
+                .Select(group => group.First()));
+
             _controllersMap = controllers.ToDictionary(keyItem => keyItem.Name, valueItem => valueItem);
         }
 
